@@ -7,16 +7,16 @@ import torch.utils.data as d
 from sklearn import metrics
 
 import utils
-from LSTM import LSTM
-from CNN import CNN
-
+from model.LSTM import LSTM
+from model.CNN import CNN
+from dataset import EmojiDataset
 
 BATCH_SIZE = 128
 DIM_EMB = 128
 NUM_TASKS = 50
 N_EPOCH = 10
 LEARNING_RATE = 1e-3
-DATA_FILE = "data_50.pickle"
+DATA_FILE = r"./data/train_succinct50.pickle"
 
 def Pred(test_loader, model):
     preds = []
@@ -109,14 +109,23 @@ def Train(train_loader, val_loader, weight_pos):
         last_val_score = val_score
     return model
 
+
+
+
 if __name__ == "__main__":
     if len(sys.argv) < 3:
         print("Need model description")
     else:
         X_train, X_test, X_val, Y_train, Y_test, Y_val, weight_pos = utils.load_data_nn(DATA_FILE, NUM_TASKS)
-        train_data = d.TensorDataset(torch.LongTensor(X_train), torch.FloatTensor(Y_train))
-        test_data = d.TensorDataset(torch.LongTensor(X_test), torch.FloatTensor(Y_test))
-        val_data = d.TensorDataset(torch.LongTensor(X_val), torch.FloatTensor(Y_val))
+
+        # train_data = d.TensorDataset(torch.LongTensor(X_train), torch.FloatTensor(Y_train))
+        # test_data = d.TensorDataset(torch.LongTensor(X_test), torch.FloatTensor(Y_test))
+        # val_data = d.TensorDataset(torch.LongTensor(X_val), torch.FloatTensor(Y_val))
+
+        train_data = EmojiDataset(X_train, Y_train)
+        test_data = EmojiDataset(X_test, Y_test)
+        val_data = EmojiDataset(X_val, Y_val)
+
         train_loader = d.DataLoader(train_data, batch_size=BATCH_SIZE)
         test_loader = d.DataLoader(test_data, batch_size=BATCH_SIZE)
         val_loader = d.DataLoader(val_data, batch_size=BATCH_SIZE)
