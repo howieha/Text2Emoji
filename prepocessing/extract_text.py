@@ -31,7 +31,7 @@ def lookup_tweets(api, tweet_IDs):
     ids = []
     tweet_count = len(tweet_IDs)
     try:
-        for i in tqdm(range(int((tweet_count / 100)))): # + 1)):    # have problem if len(tweet_IDs)是100的倍数
+        for i in tqdm(range(int((tweet_count / 100)))): # + 1)):    # has problem if len(tweet_IDs) is a multiple of 100
             # Catch the last group if it is less than 100 tweets
             end_loc = min((i + 1) * 100, tweet_count)
             tempData = api.statuses_lookup(tweet_IDs[i * 100:end_loc])
