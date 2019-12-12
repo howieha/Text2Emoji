@@ -70,3 +70,13 @@ def load_data_nn(dataset, num_class):
 
     return X_train, X_test, X_val, Y_train, Y_test, Y_val, weight_pos
 
+# list = annotations of 50 most frequently used emojis
+def locate_emojis(dataset, list, outfile):
+    file = pd.read_csv(dataset)
+    emoji_id = file.iloc[:,0]
+    emojis = []
+    for i in list:
+        emojis.append([i, emoji_id[i]])
+    emojis = pd.DataFrame(emojis)
+    emojis.to_csv(outfile, index=False, header=False)
+
