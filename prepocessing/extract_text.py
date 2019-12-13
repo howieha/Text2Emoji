@@ -9,10 +9,10 @@ import multiprocessing
 
 # Get tweet text by id
 def getApi():
-    CONSUMER_KEY = 'dBW3AJKhfoXSlBy4einQhC1dv'
-    CONSUMER_SECRET = '1FDmumY1RQUZIVSnFPLKaF4sFRIZomVPL925FMskB7mCMHA2U8'
-    OAUTH_TOKEN = '1194665858565410817-k7DGha9tfOuvbakfry6TGMVjngoDab'
-    OAUTH_TOKEN_SECRET = 'Jbd63HB9Qq2UDZWqAckYkVLh0dzfQeIHjtnpkcmkHkNz2'
+    CONSUMER_KEY = ''
+    CONSUMER_SECRET = ''
+    OAUTH_TOKEN = ''
+    OAUTH_TOKEN_SECRET = ''
     auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
     auth.set_access_token(OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
     api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
